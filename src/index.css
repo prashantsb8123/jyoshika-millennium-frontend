@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens
+ * Single source of truth for the "quiet luxury" JOSH Jewellery palette and
+ * typography. Every color used across the app should reference one of these
+ * tokens (via the generated Tailwind utilities, e.g. `bg-ink`, `text-gold`)
+ * instead of hardcoding hex values in components.
+ */
+@theme {
+  --color-ink: #16130f;
+  --color-ink-soft: #57524a;
+  --color-gold: #a9822c;
+  --color-gold-light: #c9a227;
+  --color-gold-pale: #efe1b0;
+  --color-cream: #f6f2e9;
+  --color-line: #e7e0d2;
+}
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer components {
+  /* Primary call-to-action: solid ink, used for the single most important
+     action in a given context (place order, add to cart, sign in, ...). */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-ink text-white text-xs font-semibold uppercase tracking-[0.15em] hover:bg-black transition-colors duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Secondary call-to-action: outlined ink, inverts on hover. */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border border-ink text-ink text-xs font-semibold uppercase tracking-[0.15em] hover:bg-ink hover:text-white transition-colors duration-200 cursor-pointer;
+  }
+
+  /* Tertiary / inline action: flat gold, used for lower-emphasis actions and
+     badges (quantity steppers, small icon buttons, tags). */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 bg-gold text-ink font-semibold hover:brightness-95 transition-all duration-200 cursor-pointer;
+  }
+
+  /* Small uppercase label used above section headings across the site. */
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.25em] text-gold;
+  }
+
+  .card-surface {
+    @apply bg-white border border-line rounded-2xl;
+  }
+}
+
+/* Custom Ultra-Thin Gold WebKit Scrollbar Everywhere (No Arrows) */
+*::-webkit-scrollbar,
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+*::-webkit-scrollbar-button,
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+*::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-light);
+}
+
+*::-webkit-scrollbar-corner,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Hide scrollbar utility when requested */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar,
+.scrollbar-none {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Marquee animation used by the top announcement bar. */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
