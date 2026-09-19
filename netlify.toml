@@ -1,0 +1,6 @@
+# Netlify build config. Build command and publish directory are already set in the
+# Netlify UI (bun run build / dist) -- this file only adds the env var the frontend
+# needs at build time to reach the deployed backend. Not a secret: this URL is public.
+
+[build.environment]
+  VITE_API_BASE_URL = "https://jewelry-ecommerce-backend-9i15.onrender.com/api"
